@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { Component } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
+import { Button } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react-bootstrap';
 import './App.css'
 
 class App extends Component {
