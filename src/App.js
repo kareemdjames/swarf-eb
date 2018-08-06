@@ -1,6 +1,6 @@
-import React, { Component } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react';
-import { Button } from '../../../../Library/Caches/typescript/2.9/node_modules/@types/react-bootstrap';
+import React, { Component } from 'react';
 import './App.css'
+import Home from './pages/Home';
 
 class App extends Component {
   constructor() {
@@ -10,9 +10,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <h1>Welcome from React</h1>
-        <Button bsStyle="primary">Primary</Button>
-        <Button bsStyle="danger">Danger</Button>
+        <Home />
       </div>  
     );
   }
