@@ -7,21 +7,41 @@ class AddTicketForm extends Component {
     super(props);
 
     this.handleSubmitEvent = this.handleSubmitEvent.bind(this);
+    this.resetForm = this.resetForm.bind(this);
   }
 
   handleSubmitEvent(e) {
     e.preventDefault();
-    console.log("Email--" + this.email.value.trim());
-    console.log("Issue Type--" + this.issueType.value.trim());
-    console.log("Department--" + this.department.value.trim());
-    console.log("Comments--" + this.comments.value.trim());
+    
+    const data = {
+      date: Date(),
+      email: this.email.value.trim(),
+      issueType: this.issueType.value.trim(),
+      department: this.department.value.trim(),
+      comments: this.comments.value.trim()
+    }
+
+    database.ref().child('helpdesk').child('tickets').push(data);
+
+    database.ref().on('child_added', function(snapshot) {
+      const data = snapshot.val();
+      snapshot.forEach(function(childSnap) {
+        console.log(childSnap.val());
+        console.log("Ticket submitted successfully");
+      });
+    });
+    e.target.reset();
+  }
+
+  resetForm() {
+    document.getElementById('form').reset();
   }
   
   render() {
     const style = {color: "#ffaaaa"};
     return (
       <Grid>
-        <form refs="form" onSubmit={this.handleSubmitEvent}>
+        <form id="form" ref={form => this.form = form} onSubmit={this.handleSubmitEvent}>
           <FormGroup controlid="email">
             <ControlLabel>Email Address</ControlLabel>
             <FormControl 
@@ -73,7 +93,7 @@ class AddTicketForm extends Component {
           </FormGroup>
           <ButtonGroup>
             <Button type="submit" bsStyle= "primary">Submit</Button>
-            <Button type="reset" bsStyle='default'>Cancel</Button>
+            <Button type="reset" bsStyle='default' onSubmit={this.resetForm}>Cancel</Button>
           </ButtonGroup>
         </form>
       </Grid>
