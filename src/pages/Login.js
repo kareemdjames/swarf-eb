@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoginForm from './login/LoginForm';
 
 class Login extends Component {
   constructor() {
@@ -9,6 +10,7 @@ class Login extends Component {
     return (
       <div>
         <h1>This is the login page</h1>
+        < LoginForm />
       </div>
     )
   }
