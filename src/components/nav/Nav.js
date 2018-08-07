@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-          <Navbar inverse collapseOnSelect pullLeft>
+          <Navbar inverse collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
                 <a href="#brand">HelpDesk</a>
