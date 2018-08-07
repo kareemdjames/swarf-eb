@@ -8,6 +8,10 @@ import ViewTickets from './pages/ViewTickets';
 class App extends Component {
   constructor() {
     super();
+    this.state = {
+      authenticated: false,
+      data: ''
+    }
   }
 
   render() {
@@ -18,7 +22,6 @@ class App extends Component {
             <Route exact path='/' component={Login} />
             <Route exact path='/add-ticket' component={AddTicket} />
             <Route exact path='/view-tickets' component={ViewTickets} />
-
           </Switch>
         </div>
       </Router>  
