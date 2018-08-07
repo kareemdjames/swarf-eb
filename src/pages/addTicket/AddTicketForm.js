@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { database } from '../../firebase';
 import { Grid, FormGroup, FormControl, ControlLabel, Button, ButtonGroup } from 'react-bootstrap';
 
 class AddTicketForm extends Component {
@@ -10,25 +11,31 @@ class AddTicketForm extends Component {
 
   handleSubmitEvent(e) {
     e.preventDefault();
+    console.log("Email--" + this.email.value.trim());
+    console.log("Issue Type--" + this.issueType.value.trim());
+    console.log("Department--" + this.department.value.trim());
+    console.log("Comments--" + this.comments.value.trim());
   }
   
   render() {
     const style = {color: "#ffaaaa"};
     return (
       <Grid>
-        <form>
-          <FormGroup controlid="formControlsEmail">
+        <form refs="form" onSubmit={this.handleSubmitEvent}>
+          <FormGroup controlid="email">
             <ControlLabel>Email Address</ControlLabel>
             <FormControl 
               type="email" 
-              placeholder="Enter email" 
+              placeholder="Enter email"
+              required inputRef={email => this.email = email}
             />
           </FormGroup>
-          <FormGroup controlId="formControlsSelect">
+          <FormGroup controlId="issueType">
             <ControlLabel>Issue Type</ControlLabel>
             <FormControl 
               componentClass="select" 
               placeholder="select"
+              required inputRef={issueType => this.issueType = issueType}
             >
               <option value="select">-----Select-----</option>
               <option value="Access Related Issue">Access Related Issue</option>
@@ -40,11 +47,12 @@ class AddTicketForm extends Component {
               <option value="Other">Other</option>
             </FormControl>
           </FormGroup>
-          <FormGroup controlId="formControlsSelect">
+          <FormGroup controlId="department">
             <ControlLabel>Assign Department</ControlLabel>
             <FormControl 
               componentClass="select" 
               placeholder="select"
+              required inputRef={department => this.department = department}
             >
               <option value="">-----Select----</option>
               <option value="Admin">Admin</option>
@@ -53,13 +61,14 @@ class AddTicketForm extends Component {
               <option value="Development">Development</option>
             </FormControl>
           </FormGroup>
-          <FormGroup controlId="formControlsTextarea">
+          <FormGroup controlId="comments">
             <ControlLabel>Comments <span style={style}> *</span>
             (<span id="maxlength"> 200 </span>characters left )</ControlLabel>
             <FormControl 
               componentClass="textarea" 
               placeholder="Comments"
               rows="3"
+              required inputRef={comments => this.comments = comments}
             />
           </FormGroup>
           <ButtonGroup>
