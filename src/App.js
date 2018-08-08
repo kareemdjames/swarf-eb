@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import {BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import Nav from './components/nav/Nav';
 import Login from './pages/Login';
 import AddTicket from './pages/AddTicket';
 import ViewTickets from './pages/ViewTickets';
@@ -17,12 +18,25 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <Route exact path='/add-ticket' component={AddTicket} />
-            <Route exact path='/view-tickets' component={ViewTickets} />
-          </Switch>
+        <div className="container"> {
+          this.state.authenticated
+          ?
+          (
+            <Fragment>
+              <Nav authenticated={this.state.authenticated} />
+              <Route path='/' render={() => (<Home userInfo = {this.state.data} />)} />
+              <Route path='/view-tickets' component={ViewTickets} />
+              <Route exact path='/add-ticket' component={AddTicket} />
+            </Fragment>
+          )
+          :
+          (
+            <Fragment>
+              <Nav authenticated={this.state.authenticated} />
+              <Route exact path='/' component={Login} />
+            </Fragment>
+          )
+        }
         </div>
       </Router>  
     );
