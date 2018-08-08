@@ -19,7 +19,7 @@ class LoginForm extends Component {
         <form 
           className='form-signin' 
           onSubmit={(event)=>{this.authWithEmailPassword(event)}} 
-          inputRef={(form)=>{this.login.form = form}}>
+          ref={(form)=>{this.loginForm = form}}>
           <FormGroup controlId='form-signin-heading'>
             <ControlLabel>Username</ControlLabel>
             <FormControl
@@ -45,6 +45,8 @@ class LoginForm extends Component {
           </Checkbox>
           <Button type="submit" bsStyle="primary" bsSize="large" block>Login</Button>
           <br />
+          <Button type="button" bsStyle="primary" bsSize="large" block onClick={()=>{this.authWithFacebook()}}>Login with Facebook</Button>
+          <Button type="button" bsStyle="primary" bsSize="large" block onClick={()=>{this.authWithGoogle()}}>Login with Google</Button>
         </form>
       </Grid>
     )
