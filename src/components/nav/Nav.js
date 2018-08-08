@@ -1,28 +1,65 @@
-import React, { Component } from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { Navbar, NavItem } from 'react-bootstrap';
 
-class Home extends Component {
+class Nav extends Component {
   render() {
     return (
       <div>
-          <Navbar inverse collapseOnSelect>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a href="#brand">HelpDesk</a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-            <Navbar.Collapse>
-              <Nav>
-                <NavItem eventKey={1} href="#">
-                  Add Ticket
-                </NavItem>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+        {
+          this.props.authenticated
+          ?
+          (
+            <Fragment>
+              <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                  <Navbar.Brand>
+                    <Link to='/'>HelpDesk</Link>
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                  <Nav>
+                    <Link to="/view-tickets">
+                      <NavItem>Tickets</NavItem>
+                    </Link>
+                  </Nav>
+                  <Nav>
+                    <Link to="/add-ticket">
+                      <NavItem>Add new ticket</NavItem>
+                    </Link>
+                  </Nav>
+                  <Nav pullRight>
+                    <Link to="/logout">
+                      <NavItem>Logout</NavItem>
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Navbar inverse collapseOnSelect>
+              <Navbar.Header>
+                <Navbar.Brand>
+                  <Link to="#brand">HelpDesk</Link>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+              </Navbar.Header>
+                <Navbar.Collapse>
+                  <Nav pullRight>
+                    <Link to="/login">
+                      <NavItem>Register/Login</NavItem>
+                    </Link>
+                  </Nav>
+                </Navbar.Collapse>
+              </Navbar>
+            </Fragment>
+          )
+        } 
       </div>
     );
   }
 }
 
-export default Home;
+export default Nav;
