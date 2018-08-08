@@ -5,6 +5,7 @@ import Nav from './components/nav/Nav';
 import Login from './pages/Login';
 import AddTicket from './pages/AddTicket';
 import ViewTickets from './pages/ViewTickets';
+import Home from './pages/Home';
 
 class App extends Component {
   constructor() {
@@ -20,7 +21,7 @@ class App extends Component {
       <Router>
         <div className="container"> {
           this.state.authenticated
-          ?
+        ?
           (
             <Fragment>
               <Nav authenticated={this.state.authenticated} />
@@ -29,11 +30,11 @@ class App extends Component {
               <Route exact path='/add-ticket' component={AddTicket} />
             </Fragment>
           )
-          :
+        :
           (
             <Fragment>
               <Nav authenticated={this.state.authenticated} />
-              <Route exact path='/' component={Login} />
+              <Route exact path='/login' component={Login} />
             </Fragment>
           )
         }
